@@ -1,0 +1,365 @@
+{
+    "educational_types": [
+        {
+            "code": "TUTORIALS",
+            "name": "Tutoriais",
+            "styles": [
+                "REFLEXIVO",
+                "TEORICO"
+            ],
+            "intelligences": [
+                "INTRAPESSOAL",
+                "VERBAL_LINGUISTICA",
+                "VISUAL_ESPACIAL"
+            ],
+            "url": "tutorials",
+            "description": "Tutoriais são essenciais para o aprendizado porque oferecem instruções claras e permitem que os alunos aprendam no seu próprio ritmo, facilitando a assimilação de novos conceitos."
+        },
+        {
+            "code": "EXERCITATION",
+            "name": "Exercitação",
+            "styles": [
+                "PRAGMATICO",
+                "ATIVO"
+            ],
+            "intelligences": [
+                "LOGICA_MATEMATICA",
+                "CINESTESICA_CORPORAL",
+                "RITMICA_MUSICAL"
+            ],
+            "url": "practice",
+            "description": "Exercitação é crucial para o aprendizado porque reforça conceitos através da prática, ajudando na fixação e aplicação do conhecimento."
+        },
+        {
+            "code": "GAMES",
+            "name": "Jogos Educacionais",
+            "styles": [
+                "ATIVO",
+                "PRAGMATICO"
+            ],
+            "intelligences": [
+                "INTERPESSOAL",
+                "LOGICA_MATEMATICA",
+                "CINESTESICA_CORPORAL",
+                "VISUAL_ESPACIAL",
+                "NATURALISTA"
+            ],
+            "url": "educational-games",
+            "description": "Jogos educacionais são importantes para o aprendizado porque tornam o processo de ensino mais divertido e engajador, estimulando a participação e a interação dos alunos."
+        },
+        {
+            "code": "SIMULATORS",
+            "name": "Simuladores",
+            "styles": [
+                "PRAGMATICO",
+                "ATIVO",
+                "REFLEXIVO",
+                "TEORICO"
+            ],
+            "intelligences": [
+                "LOGICA_MATEMATICA",
+                "CINESTESICA_CORPORAL",
+                "VISUAL_ESPACIAL",
+                "INTRAPESSOAL"
+            ],
+            "url": "simulators",
+            "description": "Simuladores são fundamentais para o aprendizado porque permitem a experimentação prática de conceitos, facilitando a compreensão e a aplicação do conhecimento."
+        },
+        {
+            "code": "VIDEOS",
+            "name": "Vídeos",
+            "styles": [
+                "REFLEXIVO",
+                "TEORICO"
+            ],
+            "intelligences": [
+                "VISUAL_ESPACIAL",
+                "VERBAL_LINGUISTICA",
+                "INTERPESSOAL",
+                "RITMICA_MUSICAL"
+            ],
+            "url": "videos",
+            "description": "Vídeos são essenciais para o aprendizado porque oferecem uma forma visual de apresentar informações, facilitando a compreensão e a retenção de conceitos."
+        },
+        {
+            "code": "BOOKS",
+            "name": "Livros",
+            "styles": [
+                "REFLEXIVO",
+                "TEORICO"
+            ],
+            "intelligences": [
+                "VERBAL_LINGUISTICA",
+                "INTRAPESSOAL",
+                "LOGICA_MATEMATICA"
+            ],
+            "url": "books",
+            "description": "Livros são importantes para o aprendizado porque fornecem informações detalhadas e aprofundadas sobre um determinado assunto, permitindo a consulta e o estudo mais aprofundado."
+        },
+        {
+            "code": "APPS",
+            "name": "Aplicativos",
+            "styles": [
+                "ATIVO",
+                "PRAGMATICO"
+            ],
+            "intelligences": [
+                "VISUAL_ESPACIAL",
+                "VERBAL_LINGUISTICA",
+                "INTRAPESSOAL",
+                "LOGICA_MATEMATICA",
+                "CINESTESICA_CORPORAL",
+                "INTERPESSOAL"
+            ],
+            "url": "apps",
+            "description": "Aplicativos são fundamentais para o aprendizado porque oferecem uma forma interativa e acessível de acessar conteúdos educacionais, facilitando o estudo e a prática de conceitos."
+        },
+        {
+            "code": "PLATFORMS",
+            "name": "Plataformas de Ensino",
+            "styles": [
+                "REFLEXIVO",
+                "TEORICO",
+                "PRAGMATICO",
+                "ATIVO"
+            ],
+            "intelligences": [
+                "VERBAL_LINGUISTICA",
+                "INTRAPESSOAL",
+                "LOGICA_MATEMATICA",
+                "INTERPESSOAL",
+                "VISUAL_ESPACIAL"
+            ],
+            "url": "learning-platforms",
+            "description": "Plataformas de ensino são essenciais para o aprendizado porque oferecem um ambiente virtual de aprendizagem, permitindo a interação e o acompanhamento dos alunos, facilitando o ensino e a avaliação de conteúdos."
+        }
+    ],
+    "educational_products": [
+        {
+            "name": "Khan Academy",
+            "info": "A Khan Academy é uma plataforma de ensino online que oferece aulas e exercícios gratuitos em diversas áreas do conhecimento, como matemática, ciências, economia, entre outros.",
+            "type": "PLATFORMS",
+            "link": "https://www.khanacademy.org/",
+            "styles": [
+                "REFLEXIVO",
+                "TEORICO",
+                "PRAGMATICO",
+                "ATIVO"
+            ],
+            "intelligences": [
+                "VERBAL_LINGUISTICA",
+                "INTRAPESSOAL",
+                "LOGICA_MATEMATICA",
+                "INTERPESSOAL",
+                "VISUAL_ESPACIAL"
+            ]
+        },
+        {
+            "name": "Duolingo",
+            "info": "O Duolingo é um aplicativo de aprendizado de idiomas que oferece lições interativas e divertidas para praticar vocabulário, gramática e pronúncia em diversos idiomas.",
+            "type": "APPS",
+            "link": "https://www.duolingo.com/",
+            "styles": [
+                "ATIVO",
+                "PRAGMATICO"
+            ],
+            "intelligences": [
+                "VISUAL_ESPACIAL",
+                "VERBAL_LINGUISTICA",
+                "INTRAPESSOAL",
+                "LOGICA_MATEMATICA",
+                "CINESTESICA_CORPORAL",
+                "INTERPESSOAL"
+            ]
+        },
+        {
+            "name": "TED-Ed",
+            "info": "O TED-Ed é uma plataforma que disponibiliza vídeos educacionais sobre diversos temas, com o objetivo de inspirar e estimular a curiosidade e o aprendizado dos espectadores.",
+            "type": "VIDEOS",
+            "link": "https://ed.ted.com/",
+            "styles": [
+                "REFLEXIVO",
+                "TEORICO"
+            ],
+            "intelligences": [
+                "VISUAL_ESPACIAL",
+                "VERBAL_LINGUISTICA",
+                "INTERPESSOAL",
+                "RITMICA_MUSICAL"
+            ]
+        },
+        {
+            "name": "Scratch",
+            "info": "O Scratch é uma plataforma de programação visual que permite criar jogos, animações e histórias interativas de forma simples e divertida, estimulando o aprendizado de programação.",
+            "type": "APPS",
+            "link": "https://scratch.mit.edu/",
+            "styles": [
+                "ATIVO",
+                "PRAGMATICO"
+            ],
+            "intelligences": [
+                "VISUAL_ESPACIAL",
+                "LOGICA_MATEMATICA",
+                "CINESTESICA_CORPORAL",
+                "INTERPESSOAL"
+            ]
+        },
+        {
+            "name": "Coursera",
+            "info": "A Coursera é uma plataforma de ensino online que oferece cursos de diversas universidades e instituições renomadas, permitindo o acesso a conteúdos acadêmicos de qualidade.",
+            "type": "PLATFORMS",
+            "link": "https://www.coursera.org/",
+            "styles": [
+                "REFLEXIVO",
+                "TEORICO",
+                "PRAGMATICO",
+                "ATIVO"
+            ],
+            "intelligences": [
+                "VERBAL_LINGUISTICA",
+                "INTRAPESSOAL",
+                "LOGICA_MATEMATICA",
+                "INTERPESSOAL",
+                "VISUAL_ESPACIAL"
+            ]
+        },
+        {
+            "name": "Codecademy",
+            "info": "O Codecademy é uma plataforma de ensino de programação que oferece cursos interativos e práticos para aprender linguagens de programação, como HTML, CSS, JavaScript, Python, entre outras.",
+            "type": "PLATFORMS",
+            "link": "https://www.codecademy.com/",
+            "styles": [
+                "REFLEXIVO",
+                "TEORICO",
+                "PRAGMATICO",
+                "ATIVO"
+            ],
+            "intelligences": [
+                "VERBAL_LINGUISTICA",
+                "INTRAPESSOAL",
+                "LOGICA_MATEMATICA",
+                "INTERPESSOAL",
+                "VISUAL_ESPACIAL"
+            ]
+        },
+        {
+            "name": "Quizlet",
+            "info": "O Quizlet é uma plataforma de estudo que oferece ferramentas para criar e compartilhar flashcards, jogos e testes de múltipla escolha, facilitando a revisão e a fixação de conteúdos.",
+            "type": "APPS",
+            "link": "https://quizlet.com/",
+            "styles": [
+                "ATIVO",
+                "PRAGMATICO"
+            ],
+            "intelligences": [
+                "VISUAL_ESPACIAL",
+                "VERBAL_LINGUISTICA",
+                "INTRAPESSOAL",
+                "LOGICA_MATEMATICA",
+                "CINESTESICA_CORPORAL",
+                "INTERPESSOAL"
+            ]
+        },
+        {
+            "name": "YouTube Edu",
+            "info": "O YouTube Edu é uma seção do YouTube dedicada a vídeos educacionais sobre diversos temas, oferecendo conteúdos de qualidade para auxiliar no aprendizado e na pesquisa.",
+            "type": "VIDEOS",
+            "link": "https://www.youtube.com/education",
+            "styles": [
+                "REFLEXIVO",
+                "TEORICO"
+            ],
+            "intelligences": [
+                "VISUAL_ESPACIAL",
+                "VERBAL_LINGUISTICA",
+                "INTERPESSOAL",
+                "RITMICA_MUSICAL"
+            ]
+        },
+        {
+            "name": "Wikipedia",
+            "info": "A Wikipedia é uma enciclopédia online colaborativa que disponibiliza informações sobre diversos assuntos, permitindo a consulta e o estudo de conteúdos de forma gratuita e acessível.",
+            "type": "BOOKS",
+            "link": "https://www.wikipedia.org/",
+            "styles": [
+                "REFLEXIVO",
+                "TEORICO"
+            ],
+            "intelligences": [
+                "VERBAL_LINGUISTICA",
+                "INTRAPESSOAL",
+                "LOGICA_MATEMATICA"
+            ]
+        },
+        {
+            "name": "Google Arts & Culture",
+            "info": "O Google Arts & Culture é uma plataforma que oferece acesso a obras de arte, exposições virtuais e informações sobre cultura e história, permitindo explorar o mundo da arte de forma interativa.",
+            "type": "APPS",
+            "link": "https://artsandculture.google.com/",
+            "styles": [
+                "ATIVO",
+                "PRAGMATICO"
+            ],
+            "intelligences": [
+                "VISUAL_ESPACIAL",
+                "VERBAL_LINGUISTICA",
+                "INTRAPESSOAL",
+                "LOGICA_MATEMATICA",
+                "CINESTESICA_CORPORAL",
+                "INTERPESSOAL"
+            ]
+        },
+        {
+            "name": "TED Talks",
+            "info": "As TED Talks são palestras curtas e inspiradoras sobre diversos temas, ministradas por especialistas e personalidades renomadas, com o objetivo de compartilhar ideias e conhecimentos de forma acessível e envolvente.",
+            "type": "VIDEOS",
+            "link": "https://www.ted.com/talks",
+            "styles": [
+                "REFLEXIVO",
+                "TEORICO"
+            ],
+            "intelligences": [
+                "VISUAL_ESPACIAL",
+                "VERBAL_LINGUISTICA",
+                "INTERPESSOAL",
+                "RITMICA_MUSICAL"
+            ]
+        },
+        {
+            "name": "Memrise",
+            "info": "O Memrise é um aplicativo de aprendizado de idiomas que utiliza técnicas de memorização e gamificação para facilitar a assimilação de vocabulário e a prática de línguas estrangeiras.",
+            "type": "APPS",
+            "link": "https://www.memrise.com/",
+            "styles": [
+                "ATIVO",
+                "PRAGMATICO"
+            ],
+            "intelligences": [
+                "VISUAL_ESPACIAL",
+                "VERBAL_LINGUISTICA",
+                "INTRAPESSOAL",
+                "LOGICA_MATEMATICA",
+                "CINESTESICA_CORPORAL",
+                "INTERPESSOAL"
+            ]
+        },
+        {
+            "name": "Wolfram Alpha",
+            "info": "O Wolfram Alpha é um mecanismo de busca computacional que fornece respostas e soluções para perguntas e problemas complexos em diversas áreas do conhecimento, como matemática, ciências, entre outros.",
+            "type": "APPS",
+            "link": "https://www.wolframalpha.com/",
+            "styles": [
+                "ATIVO",
+                "PRAGMATICO"
+            ],
+            "intelligences": [
+                "VISUAL_ESPACIAL",
+                "VERBAL_LINGUISTICA",
+                "INTRAPESSOAL",
+                "LOGICA_MATEMATICA",
+                "CINESTESICA_CORPORAL",
+                "INTERPESSOAL"
+            ]
+        }
+    ]
+}

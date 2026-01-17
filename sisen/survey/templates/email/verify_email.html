@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+  </head>
+  <body>
+    <h3>Olá, {{ current_user.first_name }}!</h3>
+    <p>Obrigado por se cadastrar em nosso sistema. Para concluir seu registro, por favor clique <a href="{{ verify_email_url }}">aqui</a> para verificar seu e-mail.</p>
+    <p>Este link expira em 2 horas. Caso você não tenha solicitado esse cadastro, clique <a href="{{ invalidate_token_url }}">aqui</a> para invalidar o link imediatamente.</p>
+    <p>Se tiver problemas com os links acima, copie e cole o seguinte endereço em seu navegador:</p>
+    <p>Para verificar seu e-mail: {{ verify_email_url }}</p>
+    <p>Para invalidar o link de verificação: {{ invalidate_token_url }}</p>
+    <p>Qualquer dúvida, responda a este e-mail para entrar em contato conosco.</p>
+  </body>
+</html>

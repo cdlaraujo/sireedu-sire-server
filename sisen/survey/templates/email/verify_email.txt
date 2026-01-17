@@ -1,0 +1,11 @@
+Olá, {{ current_user.first_name }}.
+
+Obrigado por se cadastrar em nosso sistema. Para concluir seu registro, copie e cole o endereço abaixo no seu navegador para verificar seu e-mail.
+
+{{ verify_email_url }}
+
+Este link expira em 2 horas. Caso você não tenha solicitado este cadastro e prefira invalidá-lo imediatamente, copie e cole o link abaixo no seu navegador.
+
+{{ invalidate_token_url }}
+
+Qualquer dúvida, entre em contato conosco.
