@@ -209,13 +209,13 @@ def generate_educational_products_score_for_professor(request, class_id):
             student_score_by_code[key] = student_score_by_code[key] / total_students
 
         products_list = get_products_sorted_by_similarity_score(
-            student_score_by_code, get_products()
+            student_score_by_code, get_products(class_id)
         )
     
         return products_list    
 
     # if there are no students, return the list of educational products without scores
-    products_list = sorted(get_products(), key=lambda x: x["name"])
+    products_list = sorted(get_products(class_id), key=lambda x: x["name"])
     for product in products_list:
         product["score"] = 0
 
@@ -259,34 +259,12 @@ def get_professor_educational_products(request, class_id):
 @api_view(["GET"])
 @permission_classes((IsAuthenticated, IsStudent))
 def get_all_educational_products_for_students(request, format=None):
-    """
-    Retrieve all educational products and generate recommendations for professors based on students' scores.
-
-    Parameters:
-    - request: Request object containing user information
-    - format: Optional format parameter (default is None)
-
-    Returns:
-    - Response containing a list of educational products with scores for professors or all products for students
-    """
-
     return Response({"allProducts": all_educational_products()})
 
 
 @api_view(["GET"])
 @permission_classes((IsAuthenticated, IsProfessor))
 def get_all_educational_products_for_professor(request, class_id, format=None):
-    """
-    Retrieve all educational products and generate recommendations for professors based on students' scores.
-
-    Parameters:
-    - request: Request object containing user information
-    - format: Optional format parameter (default is None)
-
-    Returns:
-    - Response containing a list of educational products with scores for professors or all products for students
-    """
-
     return Response({"allProducts": generate_educational_products_score_for_professor(request, class_id)})
 
 def all_educational_products():
@@ -306,19 +284,36 @@ def get_specific_educational_products(request, product_name):
     Returns:
     - Response: A JSON response containing the list of specific educational products based on the user's scores and preferences.
     """
-    if request.user and request.user.groups.filter(name__in=["Professor"]):
-        # # TODO: This is the best way to do, but needs to implement the post method to save the scores in the database
-        # average_scores = models.StudentScoreEA.objects.aggregate(
-        #     active=Avg("active"),
-        #     pragmatic=Avg("pragmatic"),
-        #     reflective=Avg("reflective"),
-        #     theoretical=Avg("theoretical"),
-        # )
+    
+    # --- 1. IDENTIFY THE CLASS CONTEXT ---
+    class_obj = None
+    
+    # If Professor: Get class_id from URL
+    if request.user.groups.filter(name="Professor").exists():
+        class_id = request.query_params.get('class_id')
+        if class_id:
+            try:
+                class_obj = models.Class.objects.get(id=class_id)
+                # Security: Verify professor owns this class
+                if not request.user.professor.classes.filter(id=class_id).exists():
+                    class_obj = None
+            except models.Class.DoesNotExist:
+                pass
+                
+    # If Student: Get class from their profile
+    elif request.user.groups.filter(name="Student").exists():
+        if hasattr(request.user, 'student') and request.user.student.sclass:
+            class_obj = request.user.student.sclass
 
+    if request.user and request.user.groups.filter(name__in=["Professor"]):
         styles_score = {}
         intelligences_score = {}
         total_students = 0
-        for sclass in request.user.professor.classes.all():
+        
+        # Calculate scores based on the specific class context if available
+        target_classes = [class_obj] if class_obj else request.user.professor.classes.all()
+
+        for sclass in target_classes:
             for student in sclass.students.all():
                 student_score = {}
                 for study_id in [LEARNING_STYLES_ID, INTELLIGENCES_ID]:
@@ -363,12 +358,13 @@ def get_specific_educational_products(request, product_name):
             for key in student_score_by_code:
                 student_score_by_code[key] = student_score_by_code[key] / total_students
 
+            # --- PASS CLASS OBJECT HERE ---
             specific_product_list = get_products_sorted_by_similarity_score(
-                student_score_by_code, get_specific_products(product_name)
+                student_score_by_code, get_specific_products(product_name, class_obj)
             )
         else:
-            # if there are no students, return the list of educational products without scores
-            specific_product_list = sorted(get_specific_products(product_name), key=lambda x: x["name"])
+            # --- PASS CLASS OBJECT HERE TOO ---
+            specific_product_list = sorted(get_specific_products(product_name, class_obj), key=lambda x: x["name"])
             for product in specific_product_list:
                 product["score"] = 0
 
