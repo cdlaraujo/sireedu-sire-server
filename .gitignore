@@ -110,4 +110,6 @@ venv.bak/
 *.pem
 
 dumpdata.json
-db.sqlite3
+db.sqlite3.
+
+.env

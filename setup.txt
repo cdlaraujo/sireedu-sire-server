@@ -1,0 +1,7 @@
+# # To activate env:
+
+# Run this first:
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+
+# Then activate:
+env\Scripts\activate

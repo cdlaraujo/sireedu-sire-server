@@ -10,7 +10,8 @@ from rest_framework_jwt.views import refresh_jwt_token
 from rest_framework_jwt.views import verify_jwt_token
 
 urlpatterns = [
-    path('', RedirectView.as_view(url=reverse_lazy('home_page_switcher'))),
+    # NEW (Fixed) - Redirects to the Admin panel safely
+    path('', RedirectView.as_view(url='/admin/')),
     path('api/v1/password-reset/invalidate-token/<str:token>', delete_reset_token, name='invalidate_token'),
     path('api/v1/password-reset/', include('django_rest_passwordreset.urls', namespace='password-reset')),
     path('api/v1/auth', obtain_jwt_token),
