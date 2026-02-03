@@ -109,30 +109,17 @@ def get_methodologies():
 def get_products(class_id=None):
     """
     Retrieves educational products (Types).
-    If class_id is provided, it checks if that class has specific products assigned.
-    - If YES: Returns ONLY the types of those assigned products.
-    - If NO: Returns ALL product types (default behavior).
+    Returns ALL product types (Apps, Books, etc) regardless of class configuration.
+    Filtering of content happens in get_specific_products.
     """
     educational_types_raw = EducationalType.objects.select_related(
         "styles", "intelligences"
     ).values("id", "code", "name", "description", "styles__code", "intelligences__code")
 
-    # --- FILTERING LOGIC ---
-    allowed_product_type_ids = None
-    if class_id:
-        # Check if there are any specific links for this class
-        linked_products = ClassProduct.objects.filter(class_id=class_id)
-        if linked_products.exists():
-            allowed_product_type_ids = linked_products.values_list('product__type__id', flat=True)
-
     educational_types = defaultdict(lambda: {"styles": [], "intelligences": []})
 
     for et in educational_types_raw:
         et_id = et["id"]
-
-        # Apply Filter if it exists
-        if allowed_product_type_ids is not None and et_id not in allowed_product_type_ids:
-            continue
 
         if "id" not in educational_types[et_id]:
             educational_types[et_id].update(
@@ -154,13 +141,15 @@ def get_products(class_id=None):
 
 def get_specific_products(product_name, class_object: Class = None):
     """
-    Retrieves specific products of a given type (e.g. APPS).
+    Retrieves specific products of a given type (e.g. APPS) with Exclusivity Logic.
     
-    EXCLUSIVE FILTERING LOGIC:
-    1. If a Class is provided...
-    2. And that Class has links specifically for this product type (e.g. they linked 'Khan Academy' in 'APPS')...
-    3. Then return ONLY those linked products.
-    4. Otherwise (no links for this type), return the defaults.
+    1. If the class has specific links for this category:
+       - Show ONLY those linked products (Curated View).
+       
+    2. If the class has NO links for this category:
+       - Show "Generic" products.
+       - EXCLUDE any product that is linked to ANY other class.
+       - This ensures custom products for Class A do not leak into Class B.
     """
     qs = (
         EducationalProduct.objects.select_related("type")
@@ -168,19 +157,30 @@ def get_specific_products(product_name, class_object: Class = None):
         .filter(type__code__iexact=product_name)
     )
 
-    # --- FILTERING LOGIC ---
+    is_curated_view = False
+
     if class_object:
-        # Check if there are specific links for this class AND this product type
+        # Check if there are specific links for THIS class and THIS product type
         linked_ids = list(ClassProduct.objects.filter(
             class_id=class_object.id,
             product__type__code__iexact=product_name 
         ).values_list('product_id', flat=True))
 
         if linked_ids:
-            # EXCLUSIVE MODE: The professor curated this list. Show ONLY these.
+            # EXCLUSIVE CURATED MODE: The professor curated this list. Show ONLY these.
             qs = qs.filter(id__in=linked_ids)
-        # Else: No specific links found for 'APPS' in this class? 
-        # Show all 'APPS' (standard behavior).
+            is_curated_view = True
+
+    # DEFAULT / GENERIC MODE
+    if not is_curated_view:
+        # If we are not in a curated view (either no class provided or no links for this class),
+        # we must ensure we don't show "Private" products belonging to other classes.
+        
+        # Get IDs of ALL products that are linked to ANY class in the system
+        all_private_linked_ids = ClassProduct.objects.values_list('product_id', flat=True)
+        
+        # Exclude them. We only want "Public/Generic" products here.
+        qs = qs.exclude(id__in=all_private_linked_ids)
 
     products = []
     for product in qs:
