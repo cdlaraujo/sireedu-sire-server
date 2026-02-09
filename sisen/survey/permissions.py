@@ -14,6 +14,13 @@ class IsProfessor(BasePermission):
         return request.user and request.user.groups.filter(name='Professor')
 
 
+class IsRevisor(BasePermission):
+    message = 'Apenas revisores possuem permissão de acesso à esse recurso.'
+
+    def has_permission(self, request, view):
+        return request.user and request.user.groups.filter(name='Revisor').exists()
+
+
 class IsStudentOrProfessor(BasePermission):
     message = "Apenas estudantes ou professores possuem permissão de acesso à esse recurso."
 
