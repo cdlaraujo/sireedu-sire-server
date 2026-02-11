@@ -153,12 +153,6 @@ class EducationalType(models.Model):
 
 
 class EducationalProduct(models.Model):
-    STATUS_CHOICES = [
-        ('APPROVED', 'Aprovado'),
-        ('PENDING', 'Pendente'),
-        ('REJECTED', 'Rejeitado')
-    ]
-
     name = models.CharField(max_length=255)
     info = models.CharField(max_length=255)
     link = models.CharField(max_length=255)
@@ -173,29 +167,6 @@ class EducationalProduct(models.Model):
     activity_type = models.CharField(max_length=255, default='')
     media_format = models.CharField(max_length=255, default='')
     educational_code = models.CharField(max_length=255, default='')
-
-    # Suggestions Fields
-    status = models.CharField(
-        max_length=20, 
-        choices=STATUS_CHOICES, 
-        default='APPROVED'
-    )
-    suggested_by = models.ForeignKey(
-        Professor, 
-        on_delete=models.SET_NULL, 
-        null=True, 
-        blank=True,
-        related_name="suggested_products"
-    )
-    # NEW: Identify which class this was suggested for
-    suggested_for_class = models.ForeignKey(
-        Class,
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        related_name="product_suggestions"
-    )
-    rejection_reason = models.TextField(null=True, blank=True)
     
     def __str__(self):
         if self.educational_code:

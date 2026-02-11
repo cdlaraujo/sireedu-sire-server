@@ -150,14 +150,11 @@ def get_specific_products(product_name, class_object: Class = None):
        - Show "Generic" products.
        - EXCLUDE any product that is linked to ANY other class.
        - This ensures custom products for Class A do not leak into Class B.
-
-    3. **IMPORTANT**: Only return products with status='APPROVED'.
     """
     qs = (
         EducationalProduct.objects.select_related("type")
         .prefetch_related("styles", "intelligences")
         .filter(type__code__iexact=product_name)
-        .filter(status='APPROVED') # Added Status Filter
     )
 
     is_curated_view = False
@@ -166,8 +163,7 @@ def get_specific_products(product_name, class_object: Class = None):
         # Check if there are specific links for THIS class and THIS product type
         linked_ids = list(ClassProduct.objects.filter(
             class_id=class_object.id,
-            product__type__code__iexact=product_name,
-            product__status='APPROVED' # Ensure only approved products are considered
+            product__type__code__iexact=product_name 
         ).values_list('product_id', flat=True))
 
         if linked_ids:

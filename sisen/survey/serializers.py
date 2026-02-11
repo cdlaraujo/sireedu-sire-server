@@ -11,7 +11,7 @@ class UserSerializer(serializers.ModelSerializer):
      )
 
     def to_representation(self, instance):
-        """Add Admin and Revisor to groups if applicable"""
+        """Add Admin to groups if is_staff is True"""
         ret = super().to_representation(instance)
         if instance.is_staff:
             ret['groups'].append('Admin')
@@ -154,46 +154,6 @@ class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Student
         fields = ('id', 'email', 'first_name', 'last_name', 'sclass')
-
-################### Educational Products ###################
-
-class EducationalTypeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.EducationalType
-        fields = ('id', 'name', 'code', 'description')
-
-class EducationalProductSerializer(serializers.ModelSerializer):
-    type_name = serializers.CharField(source='type.name', read_only=True)
-    suggested_by_name = serializers.SerializerMethodField()
-    suggested_for_class_name = serializers.SerializerMethodField()
-    styles_list = serializers.SerializerMethodField()
-    intelligences_list = serializers.SerializerMethodField()
-
-    class Meta:
-        model = models.EducationalProduct
-        fields = (
-            'id', 'name', 'info', 'link', 'type', 'type_name', 
-            'status', 'suggested_by', 'suggested_by_name', 
-            'suggested_for_class', 'suggested_for_class_name',
-            'educational_code', 'styles_list', 'intelligences_list'
-        )
-
-    def get_suggested_by_name(self, obj):
-        if obj.suggested_by:
-            return f"{obj.suggested_by.user.first_name} {obj.suggested_by.user.last_name}"
-        return "N/A"
-
-    def get_suggested_for_class_name(self, obj):
-        if obj.suggested_for_class:
-            return f"{obj.suggested_for_class.description} ({obj.suggested_for_class.code})"
-        return None
-
-    def get_styles_list(self, obj):
-        return list(obj.styles.values_list('code', flat=True))
-
-    def get_intelligences_list(self, obj):
-        return list(obj.intelligences.values_list('code', flat=True))
-
 
 ################### Student's Synthetic Report Serializers ###################
 
